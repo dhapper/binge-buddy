@@ -39,7 +39,7 @@ export class LoginComponent {
         this.message = 'Registration successful';
       })
       .catch(error => {
-        this.message = 'registration failed: ' + error.message;
+        this.message = 'Registration failed: ' + error.message;
         console.error(error)
       })
   }
