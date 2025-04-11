@@ -24,7 +24,6 @@ export class SearchComponent {
   performSearch(): void {
 
     if (this.searchTerm) {
-      this.lastSearchTerm = this.searchTerm
       this.tvmazeService.getShows(this.searchTerm).subscribe(
         (data: any) => {
           this.shows = data.map((item: any) => item.show);
@@ -34,6 +33,7 @@ export class SearchComponent {
         }
       );
     }
+    this.lastSearchTerm = this.searchTerm
   }
 
 }

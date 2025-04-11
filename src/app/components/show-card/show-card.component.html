@@ -1,7 +1,7 @@
 <div class="show-card">
     
     <div class="show-image"> <!-- Right side for the image -->
-        <img *ngIf="show.image" [src]="show.image?.medium" alt="{{ show.name }}" />
+        <img *ngIf="show.image" [src]="show.image.medium" alt="{{ show.name }}" />
     </div>
     
     <div class="show-details"> <!-- Left side for title, summary, and rating -->
