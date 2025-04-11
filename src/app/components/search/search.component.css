@@ -1,0 +1,25 @@
+.show-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.show-card {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* word-wrap: normal; */
+    /* font-size: 50px; */
+}
+
+button {
+    margin-bottom: 10px;
+    height: 40%;
+    font-size: 20px;
+    word-wrap: normal;
+}

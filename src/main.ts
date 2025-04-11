@@ -8,11 +8,13 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 
 import { environment } from './environments/environment';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(routes), // add your routes here
+    provideRouter(routes),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    provideHttpClient()
   ]
 }).catch(err => console.error(err));
