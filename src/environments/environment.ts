@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    TVMAZE_API_URL:  'https://api.tvmaze.com',
     firebaseConfig: {
       apiKey: "AIzaSyC3qtvctuolfG2tLHeynh23U12YvMHJiCE",
       authDomain: "binge-buddy-765b1.firebaseapp.com",

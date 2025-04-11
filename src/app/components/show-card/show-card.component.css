@@ -1,0 +1,24 @@
+.show-card {
+    display: flex;                  
+    align-items: center;
+    background-color: rgb(112, 134, 134);
+    margin: 0;
+    padding: 0;       
+}
+
+.show-details h3 {
+    text-align: center;
+    margin: 0;
+}
+
+.show-details p {
+    text-align: center;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .show-card {
+        flex-direction: column;
+        align-items: center;
+    }
+}

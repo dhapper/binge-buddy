@@ -1,0 +1,12 @@
+<div class="show-card">
+    
+    <div class="show-image">
+        <img *ngIf="show.image" [src]="show.image.medium" alt="{{ show.name }}" />
+    </div>
+    
+    <div class="show-details">
+        <h3>{{ show.name }}</h3>
+        <div class="summary" [innerHTML]="getShortSummary(show.summary, 30)"></div>
+        <p *ngIf="show.rating?.average">Rating: {{ show.rating?.average }}</p>
+    </div>
+</div>
