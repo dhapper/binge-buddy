@@ -1,25 +1,51 @@
 .show-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    max-width: 800px;
+    background-color: rgb(44, 44, 44);
 }
 
 .show-card {
     flex: 1;
-    margin-right: 20px;
+    max-width: 80%;
 }
 
 .button-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* word-wrap: normal; */
-    /* font-size: 50px; */
+    justify-items: center;
+    justify-content: space-around;
 }
 
-button {
+.show-button {
     margin-bottom: 10px;
     height: 40%;
     font-size: 20px;
-    word-wrap: normal;
+    width: 100%;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .show-container {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Allow children to stretch to full width */
+    }
+
+    .show-card {
+        margin-right: 0; /* Reset margin for mobile */
+        max-width: 100%; /* Allow full width */
+        margin-bottom: 10px; /* Add space below the show card */
+    }
+
+    .show-button {
+        font-size: 16px; /* Make buttons smaller for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .show-button {
+        font-size: 14px; /* Further reduce font size for very small screens */
+        height: 35%; /* Adjust height for better visibility */
+    }
 }

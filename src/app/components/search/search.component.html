@@ -1,22 +1,25 @@
 <app-navbar></app-navbar>
 
-<h1>Search for TV Shows</h1>
-<input [(ngModel)]="searchTerm" placeholder="Enter show name..." />
+<div class="main-container">
+    <h1>Search for TV Shows</h1>
+    <input [(ngModel)]="searchTerm" placeholder="Enter show name..." />
 
-<button (click)="performSearch()">Search</button>
+    <button (click)="performSearch()">Search</button>
 
-<div *ngFor="let show of shows" class="show-container">
+    <div *ngFor="let show of shows" class="show-container">
 
-    <!-- this should take up most of the left side -->
-    <app-show-card [show]="show" class="show-card"></app-show-card>
+        <!-- this should take up most of the left side -->
+        <app-show-card [show]="show" class="show-card"></app-show-card>
 
-    <!-- this should take up the right side and be vertically stacked -->
-    <div class="button-container">
-        <button>Add to<br>watch list</button>
-        <button>Add to<br>watch history</button>
+        <!-- this should take up the right side and be vertically stacked -->
+        <div class="button-container">
+            <button class="show-button">Add to<br>watch list</button>
+            <button class="show-button">Add to<br>watch history</button>
+        </div>
     </div>
-</div>
 
-<div *ngIf="shows.length === 0 && lastSearchTerm">
-    <p>No results found for "{{ lastSearchTerm }}".</p>
+    <div *ngIf="shows.length === 0 && lastSearchTerm">
+        <p>No results found for "{{ lastSearchTerm }}".</p>
+    </div>
+
 </div>

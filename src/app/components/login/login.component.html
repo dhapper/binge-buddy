@@ -1,10 +1,14 @@
-<h2>LOGIN</h2>
+<div class="main-container">
 
-<div><input [(ngModel)]="email" placeholder="Email" /></div>
-<div><input [(ngModel)]="password" type="password" placeholder="Password" /></div>
-<div><button (click)="onLogin()">Login</button></div>
-<div><button (click)="onRegister()">Register</button></div>
+  <h2>LOGIN</h2>
 
-<div *ngIf="message">
-  {{ message }}
+  <div><input [(ngModel)]="email" placeholder="Email" /></div>
+  <div><input [(ngModel)]="password" type="password" placeholder="Password" /></div>
+  <div><button (click)="onLogin()">Login</button></div>
+  <div><button (click)="onRegister()">Register</button></div>
+
+  <div *ngIf="message">
+    {{ message }}
+  </div>
+
 </div>
