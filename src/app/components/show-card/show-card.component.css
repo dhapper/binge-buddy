@@ -1,9 +1,14 @@
 .show-card {
     display: flex;                  
     align-items: center;
-    background-color: rgb(112, 134, 134);
+    background-color: var(--background-variant);
     margin: 0;
-    padding: 0;       
+    padding: 0;
+    border-radius: 28px;
+    
+    border-width: 4px;
+    border-color: var(--accent);
+    border-style: solid;
 }
 
 .show-details h3 {
@@ -14,6 +19,14 @@
 .show-details p {
     text-align: center;
     margin: 0;
+}
+
+.show-image {
+    border-radius: 20px;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    box-shadow: 0px 0px 16px black;
 }
 
 @media (max-width: 768px) {

@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 
 <div class="main-container">
+
     <h1>Search for TV Shows</h1>
     <input [(ngModel)]="searchTerm" placeholder="Enter show name..." />
-
-    <button (click)="performSearch()">Search</button>
+    <button class="btn-margin" (click)="performSearch()">Search</button>
 
     <div *ngFor="let show of shows" class="show-container">
 

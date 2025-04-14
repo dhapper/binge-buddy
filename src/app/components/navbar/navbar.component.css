@@ -1,5 +1,5 @@
 nav {
-    background-color: #0080ff;
+    background-color: var(--primary-color);
     padding: 1rem;
   }
   
@@ -15,10 +15,12 @@ nav {
   }
   
   a {
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
   }
   
+
+
   a:hover {
     text-decoration: underline;
   }
