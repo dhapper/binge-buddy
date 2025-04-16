@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'binge_buddy';
 
   constructor(private themeService: ThemeService) {
-    this.themeService.setTheme('light-mode');
+    this.themeService.setTheme('dark-mode');
   }
   
 }

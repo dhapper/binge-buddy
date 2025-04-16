@@ -9,11 +9,13 @@ import { environment } from '../../environments/environment'
 })
 export class TvmazeService {
 
-  // private API_URL = 'https://api.tvmaze.com';
-
   constructor(private http: HttpClient) {}
 
   getShows(query: string): Observable<{ show: Show }[]> {
     return this.http.get<{ show: Show }[]>(`${environment.TVMAZE_API_URL}/search/shows?q=${query}`);
+  }
+
+  getShowById(showId: number): Observable<Show> {
+    return this.http.get<Show>(`${environment.TVMAZE_API_URL}/shows/${showId}`);
   }
 }

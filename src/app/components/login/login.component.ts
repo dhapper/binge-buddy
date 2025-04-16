@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { FirestoreDatabase } from '../../services/firestore-database.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,23 @@ export class LoginComponent {
   password = '';
   message = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private firestoreDatabase: FirestoreDatabase
+  ) { }
 
   onLogin() {
     this.authService.login(this.email, this.password)
       .then(() => {
         console.log('Login successful')
         this.message = 'Login successful';
+
+        const userID = this.authService.currentUser?.uid!;
+        return this.firestoreDatabase.loadWatchList(userID);
+      })
+      .then(() => {
+        console.log('Watchlist loaded:', this.firestoreDatabase.getLocalWatchList(this.authService.currentUser?.uid!));
         this.router.navigate(['/profile']);
       })
       .catch((error) => {
