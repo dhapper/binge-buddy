@@ -1,0 +1,6 @@
+<app-navbar></app-navbar>
+
+<h2>Reccomandations based on your watch history:</h2>
+<div *ngFor="let show of shows">
+    <app-show-card [show]="show"></app-show-card>
+</div>

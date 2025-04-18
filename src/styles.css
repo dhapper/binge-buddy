@@ -34,6 +34,20 @@ button:hover {
     /* scale: 1.025; */
 }
 
+button {
+    background-color: var(--accent);
+    color: var(--button-text);
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: grey;
+    color: #ccc;
+}
+
 div {
     /* margin-top: 10px;
     margin-bottom: 10px; */

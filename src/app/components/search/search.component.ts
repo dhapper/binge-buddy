@@ -7,6 +7,7 @@ import { Show } from '../../models/show';
 import { ShowCardComponent } from "../show-card/show-card.component";
 import { FirestoreDatabase } from '../../services/firestore-database.service';
 import { AuthService } from '../../services/auth.service';
+import { AppConstants } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-search',
@@ -33,10 +34,6 @@ export class SearchComponent {
       this.tvmazeService.getShows(this.searchTerm).subscribe(
         (data: any) => {
           this.shows = data.map((item: any) => item.show);
-
-          // this.shows.forEach(show => {
-          //   console.log(`ID: ${show.id}, Name: ${show.name}`);
-          // });
         },
         (error) => {
           console.error('Error fetching shows:', error);
@@ -46,17 +43,15 @@ export class SearchComponent {
     this.lastSearchTerm = this.searchTerm
   }
 
-  addToWatchList(showID: number): void {
-    // console.log(showID);
-
+  addToDatabase(showID: number, category: string) {
     const userID = this.authService.currentUser?.uid!;
 
-    this.firestoreDatabase.addToWatchList(userID, showID)
+    this.firestoreDatabase.addToDatabase(userID, showID, category)
       .then(() => {
-        console.log(`Successfully added show ${showID} to watch-list.`);
+        console.log(`Successfully added show ${showID} to ${category}.`);
       })
       .catch(error => {
-        console.error("Failed to add show to watch-list:", error);
+        console.error(`Failed to add show to ${category}:`, error);
       });
   }
 

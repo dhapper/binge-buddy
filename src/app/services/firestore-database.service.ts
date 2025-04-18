@@ -1,39 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Firestore, doc, getDocs, collection, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDocs, collection, setDoc, deleteDoc } from '@angular/fire/firestore';
 import { TvmazeService } from './tvmaze.service';
 import { firstValueFrom } from 'rxjs';
 import { Show } from '../models/show';
+import { AppConstants } from '../constants/app.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreDatabase {
   private watchList: { [key: string]: Show[] } = {};
+  private history: { [key: string]: Show[] } = {};
 
   constructor(
     private firestore: Firestore,
     private tvmazeService: TvmazeService
-  ) {}
+  ) { }
 
   /**
-   * Adds a show to the user's watch list in Firestore and updates the local cache.
+   * Watch-list functions
    */
-  async addToWatchList(userID: string, showID: number): Promise<void> {
-    const show = await firstValueFrom(this.tvmazeService.getShowById(showID));
-    const watchListDocRef = doc(this.firestore, `users/${userID}/watch-list/${showID}`);
-    
-    await setDoc(watchListDocRef, {
-      showID,
-      addedAt: new Date()
-    });
 
-    this.updateLocalWatchList(userID, show);
-    console.log(`Added show ${show.name} (ID: ${showID}) to watch list for user ${userID}`);
+  getLocalWatchList(userID: string): Show[] {
+    return this.watchList[userID] || [];
   }
 
-  /**
-   * Updates the local watch list cache.
-   */
   private updateLocalWatchList(userID: string, show: Show): void {
     if (!this.watchList[userID]) {
       this.watchList[userID] = [];
@@ -44,19 +35,64 @@ export class FirestoreDatabase {
     }
   }
 
-  /**
-   * Returns the local watch list for the specified user.
-   */
-  getLocalWatchList(userID: string): Show[] {
-    return this.watchList[userID] || [];
+  private removeFromLocalWatchList(userID: string, showID: number): void {
+    if (this.watchList[userID]) {
+      this.watchList[userID] = this.watchList[userID].filter(s => s.id !== showID);
+    }
   }
 
   /**
-   * Loads the user's watch list from Firestore and fills the local cache with full show data.
+   * History Functions
    */
-  async loadWatchList(userID: string): Promise<void> {
-    const watchListCollectionRef = collection(this.firestore, `users/${userID}/watch-list`);
-    const querySnapshot = await getDocs(watchListCollectionRef);
+
+  getLocalHistory(userID: string): Show[] {
+    return this.history[userID] || [];
+  }
+
+  private updateLocalHistory(userID: string, show: Show): void {
+    if (!this.history[userID]) {
+      this.history[userID] = [];
+    }
+    const alreadyExists = this.history[userID].some(s => s.id === show.id);
+    if (!alreadyExists) {
+      this.history[userID].push(show);
+    }
+  }
+
+  private removeFromLocalHistory(userID: string, showID: number): void {
+    if (this.history[userID]) {
+      this.history[userID] = this.history[userID].filter(s => s.id !== showID);
+    }
+  }
+
+  /**
+   * General
+   */
+  
+  async addToDatabase(userID: string, showID: number, category: string): Promise<void> {
+    const show = await firstValueFrom(this.tvmazeService.getShowById(showID));
+    const watchListDocRef = doc(this.firestore, `users/${userID}/${category}/${showID}`);
+
+    await setDoc(watchListDocRef, {
+      showID,
+      addedAt: new Date()
+    });
+
+    switch (category){
+      case AppConstants.CATEGORIES.WATCH_LIST:
+        this.updateLocalWatchList(userID, show);
+        break;
+      case AppConstants.CATEGORIES.HISTORY:
+        this.updateLocalHistory(userID, show);
+        break;
+    }
+
+    console.log(`Added show ${show.name} (ID: ${showID}) to ${category} for user ${userID}`);
+  }
+
+  async load(userID: string, category: string): Promise<void> {
+    const collectionRef = collection(this.firestore, `users/${userID}/${category}`);
+    const querySnapshot = await getDocs(collectionRef);
 
     const showPromises: Promise<Show>[] = [];
     querySnapshot.forEach((docSnap) => {
@@ -67,7 +103,32 @@ export class FirestoreDatabase {
     });
 
     const shows = await Promise.all(showPromises);
-    this.watchList[userID] = shows;
-    console.log(`Loaded watch list for user ${userID} with ${shows.length} shows.`);
+
+    switch (category){
+      case AppConstants.CATEGORIES.WATCH_LIST:
+        this.watchList[userID] = shows;
+        break;
+      case AppConstants.CATEGORIES.HISTORY:
+        this.history[userID] = shows;
+        break;
+    }
+
+    console.log(`Loaded ${category} for user ${userID} with ${shows.length} shows.`);
   }
+
+  async deleteFromDatabase(userID: string, showID: number, category: string): Promise<void> {
+    const watchListDocRef = doc(this.firestore, `users/${userID}/${category}/${showID}`);
+    
+    await deleteDoc(watchListDocRef);
+  
+    switch (category) {
+      case AppConstants.CATEGORIES.WATCH_LIST:
+        this.removeFromLocalWatchList(userID, showID);
+        break;
+      case AppConstants.CATEGORIES.HISTORY:
+        this.removeFromLocalHistory(userID, showID);
+        break;
+    }
+  }
+  
 }

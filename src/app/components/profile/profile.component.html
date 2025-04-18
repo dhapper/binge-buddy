@@ -1,18 +1,23 @@
 <app-navbar></app-navbar>
 
-<h2>Profile Page</h2>
-<p>Welcome to your profile!</p>
+<div class="main-container">
 
-<div>
-  <h2>Your Watchlist</h2>
-  <div *ngIf="watchlist.length > 0; else noWatchlist">
-    <ul>
-      <li *ngFor="let show of watchlist">
-        {{ show.name }}
-      </li>
-    </ul>
+  <h2>Welcome back EMAIL!</h2>
+
+
+  <button (click)="toggleList()" [disabled]="firstList" style="margin-right: 10px;">watch-list</button>
+  <button (click)="toggleList()" [disabled]="!firstList" style="margin-right: 10px;">your history</button>
+
+  <div *ngIf="firstList">
+    <app-list [list]="watchlist" [category]="AppConstants.CATEGORIES.WATCH_LIST"
+      [title]="AppConstants.CATEGORIES.WATCH_LIST" (onDelete)="delete($event, AppConstants.CATEGORIES.WATCH_LIST)">
+    </app-list>
   </div>
-  <ng-template #noWatchlist>
-    <p>No shows in your watchlist.</p>
-  </ng-template>
+
+  <div *ngIf="!firstList">
+    <app-list [list]="history" [category]="AppConstants.CATEGORIES.HISTORY" [title]="AppConstants.CATEGORIES.HISTORY"
+      (onDelete)="delete($event, AppConstants.CATEGORIES.HISTORY)">
+    </app-list>
+  </div>
+
 </div>

@@ -6,6 +6,7 @@
     <div class="show-details">
         <h3>{{ show.name }}</h3>
         <div class="summary" [innerHTML]="getShortSummary(show.summary, 25)"></div>
+        <p> {{ show.genres }} </p>
         <p *ngIf="show.rating?.average">Rating: {{ show.rating?.average }}</p>
     </div>
 </div>

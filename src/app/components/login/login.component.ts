@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { FirestoreDatabase } from '../../services/firestore-database.service';
+import { AppConstants } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-login',
@@ -23,24 +24,30 @@ export class LoginComponent {
     private router: Router,
     private firestoreDatabase: FirestoreDatabase
   ) { }
-
+  
   onLogin() {
     this.authService.login(this.email, this.password)
       .then(() => {
-        console.log('Login successful')
+        console.log('Login successful');
         this.message = 'Login successful';
 
         const userID = this.authService.currentUser?.uid!;
-        return this.firestoreDatabase.loadWatchList(userID);
+
+        // Use Promise.all to run both loads in parallel
+        return Promise.all([
+          this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.WATCH_LIST),
+          this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.HISTORY)
+        ]);
       })
       .then(() => {
         console.log('Watchlist loaded:', this.firestoreDatabase.getLocalWatchList(this.authService.currentUser?.uid!));
+        console.log('History loaded:', this.firestoreDatabase.getLocalHistory(this.authService.currentUser?.uid!));
         this.router.navigate(['/profile']);
       })
       .catch((error) => {
         this.message = 'Login failed: ' + error.message;
         console.error('Login failed:', error.message);
-      })
+      });
   }
 
   onRegister() {
