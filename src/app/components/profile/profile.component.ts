@@ -5,13 +5,12 @@ import { FirestoreDatabase } from '../../services/firestore-database.service';
 import { CommonModule } from '@angular/common';
 import { TvmazeService } from '../../services/tvmaze.service';
 import { Show } from '../../models/show';
-import { ShowCardComponent } from "../show-card/show-card.component";
 import { ListComponent } from "../list/list.component";
 import { AppConstants } from '../../constants/app.constants';
 
 @Component({
   selector: 'app-profile',
-  imports: [NavbarComponent, CommonModule, ShowCardComponent, ListComponent],
+  imports: [NavbarComponent, CommonModule, ListComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

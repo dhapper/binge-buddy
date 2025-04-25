@@ -1,12 +1,22 @@
-<h2>Your {{ title }}</h2>
-  <div *ngIf="list.length > 0; else noList">
-    <div class="watchlist-container">
-      <div *ngFor="let show of list">
-        <app-show-card [show]="show"></app-show-card>
-        <button (click)="delete(show.id)">Delete</button>
-      </div>
+<div class="main-container">
+
+  <h2>Your {{ title }}:</h2>
+
+
+<div *ngIf="list.length > 0; else noList">
+
+  <div class="list-container">
+
+    <div class="list-obj" *ngFor="let show of list">
+      <app-show-card [show]="show" [isSmall]="true"></app-show-card>
+      <button (click)="delete(show.id)">X</button>
     </div>
+
   </div>
-  <ng-template #noList>
-    <p>No shows in your {{ title }}.</p>
-  </ng-template>
+
+</div>
+<ng-template #noList>
+  <p>No shows in your {{ title }}.</p>
+</ng-template>
+
+</div>

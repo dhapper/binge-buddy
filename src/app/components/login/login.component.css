@@ -1,12 +1,169 @@
 .main-container {
     display: flex;                  
-    flex-direction: column;         
     justify-content: center;        
     align-items: center;            
     height: 100vh;
+
+    background-color: var(--background-variant);
+}
+
+.form-container {
+    display: flex;                  
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;  
+
+    background-color: var(--background-variant);
+
+    border-radius: 64px;
+    border-style: hidden;
+    overflow: hidden;
+    box-shadow: 0px 0px 80px black;
+}
+
+div {
+    margin: 0px;
+}
+
+.left-container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* margin: 30px; */
+}
+
+.left-container * {
+    padding: 5px;
+}
+
+.right-container {
+    flex: 1;
+    padding: 0px;
+}
+
+.right-container img {
+    width: 100%;
+    height: 100%;
+
+    box-shadow: 0px 0px 16px black;
+}
+
+@media (max-width: 768px) {
+    .right-container {
+        display: none; /* Hide on screens smaller than 768px */
+    }
+
+    .form-container {
+        flex-direction: column; /* Optional: stack elements vertically on mobile */
+    }
+
+    /* .left-container * {
+        padding: 10px;
+    } */
+
+    .left-container {
+        margin: 30px;
+    }
+    
+}
+
+button {
+    width: 200px;
+    box-shadow: 0px 0px 8px black;
+    background-color: var(--login);
+    color: black;
+    border-radius: 32px;
+}
+
+button:hover {
+    background-color:  var(--login-darker);
+    scale: 1.025;
+}
+
+.reg-button button{
+    background-color: var(--login-accent);
+}
+
+.reg-button button:hover{
+    background-color: var(--login-accent-darker);
+}
+
+input {
+    border: 1px solid var(--login);
+    background-color: var(--input-bg);
+    width: 300px;
+}
+
+h4 {
+    color: var(--text);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--login-darker) inset;
+    -webkit-text-fill-color: var(--text);
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px var(--login-darker) inset; 
+    -webkit-text-fill-color: var(--text);
+}
+
+input:-moz-autofill {
+    background-color: var(--login-darker);
+    color: var(--text);
+}
+
+.alert {
+    margin: 20px;
+    box-shadow: 0px 0px 8px black;
 }
 
 
-button {
-    width: 120px;
+/* Basic styling for the toggle switch */
+.toggle-switch {
+    position: relative;
+    display: inline-flex; /* Use flex to align items */
+    align-items: center; /* Center items vertically */
+}
+
+.toggle-switch input {
+    opacity: 0; /* Hide the default checkbox */
+    width: 0;
+    height: 0;
+}
+
+/* Slider styling */
+.slider {
+    position: relative;
+    cursor: pointer; /* Mouse pointer on hover */
+    width: 60px; /* Width of the toggle */
+    height: 30px; /* Height of the toggle */
+    background-color: var(--login-darker);
+    border-radius: 30px; /* Rounded corners for the toggle */
+    transition: background-color 0.2s; /* Smooth transition */
+}
+
+/* Circle inside the toggle switch */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px; /* Height of the inner circle */
+    width: 26px; /* Width of the inner circle */
+    left: 4px; /* Position it inside the toggle */
+    bottom: 2px; /* Position it inside the toggle */
+    background-color: white; /* Color of the inner circle */
+    border-radius: 50%; /* Make it a circle */
+    transition: transform 0.2s; /* Smooth transition for movement */
+}
+
+/* Change background color and position the circle when checked */
+input:checked + .slider {
+    background-color: var(--login);
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px); /* Move the circle when toggled on */
 }

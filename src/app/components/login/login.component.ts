@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { FirestoreDatabase } from '../../services/firestore-database.service';
 import { AppConstants } from '../../constants/app.constants';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -22,14 +23,15 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private firestoreDatabase: FirestoreDatabase
+    private firestoreDatabase: FirestoreDatabase,
+    private theme: ThemeService
   ) { }
   
   onLogin() {
     this.authService.login(this.email, this.password)
       .then(() => {
         console.log('Login successful');
-        this.message = 'Login successful';
+        // this.message = 'Login successful';
 
         const userID = this.authService.currentUser?.uid!;
 
@@ -45,8 +47,8 @@ export class LoginComponent {
         this.router.navigate(['/profile']);
       })
       .catch((error) => {
-        this.message = 'Login failed: ' + error.message;
-        console.error('Login failed:', error.message);
+        this.message = error.message.substring(10); // declutter message 
+        console.error(error.message);
       });
   }
 
@@ -57,9 +59,13 @@ export class LoginComponent {
         this.message = 'Registration successful';
       })
       .catch(error => {
-        this.message = 'Registration failed: ' + error.message;
+        this.message = error.message.substring(10);
         console.error(error)
       })
+  }
+
+  onThemeToggle(event: Event): void {
+    this.theme.toggleTheme();
   }
 
 }

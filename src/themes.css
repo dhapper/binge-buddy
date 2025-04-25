@@ -4,7 +4,23 @@
   --text: #000000;
   --accent: #403055;
   --accent-variant: #624b80;
+
+  --login: #969696;
+  --login-darker: #727272;
+  --login-accent: #ffc1ad;
+  --login-accent-darker: #a8857a;
+  --input-bg: #4e4e4e;
 }
+
+/* .dark-mode {
+  --background: #333333;;
+  --background-variant: #272727;
+  --text: #ffffff;
+  --accent: #ffc1ad;
+  --accent-variant: #a8857a;
+
+  --input-bg: #4e4e4e;
+} */
 
 .dark-mode {
   --background: #121212;
@@ -12,6 +28,8 @@
   --text: #ffffff;
   --accent: #b277ff;
   --accent-variant: #6f4c9c;
+
+  --input-bg: #4e4e4e;
 }
 
 .light-mode {
@@ -20,4 +38,6 @@
   --text: #000000;
   --accent: #403055;
   --accent-variant: #624b80;
+
+  --input-bg: #e0e0e0;
 }

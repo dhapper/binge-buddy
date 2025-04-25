@@ -1,0 +1,22 @@
+.list-container {
+    display: block;
+    text-align: center;
+}
+
+.list-container > * {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.list-obj {
+    padding: 10px;
+}
+
+.list-obj:hover {
+    border-radius: 20px;
+    box-shadow: 0px 0px 16px var(--accent);
+}
+
+button {
+    font-size: 8px;
+}

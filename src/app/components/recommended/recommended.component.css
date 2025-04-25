@@ -1,0 +1,41 @@
+.show-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+.show-card {
+    flex: 1;
+    max-width: 80%;
+}
+
+.button-container {
+    display: grid;               /* Enables grid layout */
+    place-items: center;         /* Centers content both vertically and horizontally */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .show-container {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: stretch; /* Allow children to stretch to full width */
+    }
+
+    .show-card {
+        margin-right: 0; /* Reset margin for mobile */
+        max-width: 100%; /* Allow full width */
+        margin-bottom: 10px; /* Add space below the show card */
+    }
+
+    .show-button {
+        font-size: 16px; /* Make buttons smaller for mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .show-button {
+        font-size: 14px; /* Further reduce font size for very small screens */
+        height: 35%; /* Adjust height for better visibility */
+    }
+}

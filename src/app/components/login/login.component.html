@@ -1,17 +1,33 @@
 <div class="main-container">
 
-  <h2>LOGIN</h2>
+  <div class="form-container">
 
-  <div><input [(ngModel)]="email" placeholder="Email" /></div>
-  <div><input [(ngModel)]="password" type="password" placeholder="Password" /></div>
+    <div class="left-container">
 
-  <div><input placeholder="test" /></div>
-  
-  <div><button (click)="onLogin()">Login</button></div>
-  <div><button (click)="onRegister()">Register</button></div>
+      <h4><b>Login to Your Account</b></h4>
 
-  <div *ngIf="message">
-    {{ message }}
+      <div><input [(ngModel)]="email" placeholder="Email" /></div>
+      <div><input [(ngModel)]="password" type="password" placeholder="Password" /></div>
+
+      <div><button (click)="onLogin()">Login</button></div>
+      <div class="reg-button"><button (click)="onRegister()">Register</button></div>
+
+      <label class="toggle-switch">
+        <input type="checkbox" id="theme-toggle" (change)="onThemeToggle($event)"/>
+        <span class="slider"></span>
+        <i id="moon-icon" class="fas fa-moon"></i>
+      </label>
+
+      <div *ngIf="message" class="alert alert-warning">
+        {{ message }}
+      </div>
+
+    </div>
+
+    <div class="right-container">
+      <img src="assets/login_image_v1.jpg" alt="Default Image">
+    </div>
+
   </div>
 
 </div>

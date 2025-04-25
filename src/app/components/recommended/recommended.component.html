@@ -1,6 +1,16 @@
 <app-navbar></app-navbar>
 
-<h2>Reccomandations based on your watch history:</h2>
-<div *ngFor="let show of shows">
-    <app-show-card [show]="show"></app-show-card>
+<div class="main-container">
+
+    <h2>Recommendations based on your watch history:</h2>
+
+    <div class="show-container">
+        <div *ngFor="let show of shows">
+            <app-show-card [show]="show" class="show-card"></app-show-card>
+            <div class="button-container">
+                <button (click)="addToDatabase(show.id, 'watch-list')">Add to watch-list</button>
+            </div>
+        </div>
+    </div>
+
 </div>

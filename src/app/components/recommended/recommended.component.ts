@@ -45,4 +45,16 @@ export class RecommendedComponent {
       console.error('User not logged in.');
     }
   }
+
+  addToDatabase(showID: number, category: string) {
+    const userID = this.authService.currentUser?.uid!;
+
+    this.firestoreDatabase.addToDatabase(userID, showID, category)
+      .then(() => {
+        console.log(`Successfully added show ${showID} to ${category}.`);
+      })
+      .catch(error => {
+        console.error(`Failed to add show to ${category}:`, error);
+      });
+  }
 }

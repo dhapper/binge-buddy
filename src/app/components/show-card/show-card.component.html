@@ -1,12 +1,22 @@
-<div class="show-card">
-    <div class="show-image">
-        <img class="show-image" *ngIf="show.image" [src]="show.image.medium" alt="{{ show.name }}" />
+
+<div *ngIf="!isSmall">
+    <div class="show-card">
+        <div class="show-image">
+            <img class="show-image" *ngIf="show.image" [src]="show.image.medium" alt="{{ show.name }}" />
+        </div>
+        
+        <div class="show-details">
+            <h3>{{ show.name }}</h3>
+            <div class="summary" [innerHTML]="getShortSummary(show.summary, 25)"></div>
+            <p> {{ formatGenres(show.genres.join(',')) }} </p>
+            <p *ngIf="show.rating?.average">Rating: {{ show.rating?.average }}</p>
+        </div>
     </div>
-    
-    <div class="show-details">
-        <h3>{{ show.name }}</h3>
-        <div class="summary" [innerHTML]="getShortSummary(show.summary, 25)"></div>
-        <p> {{ show.genres }} </p>
-        <p *ngIf="show.rating?.average">Rating: {{ show.rating?.average }}</p>
+</div>
+
+<div *ngIf="isSmall">
+    <h5>{{ getShortTitle(show.name, 15) }}</h5>
+    <div class="small-show-image">
+        <img class="show-image" *ngIf="show.image" [src]="show.image.medium" alt="{{ show.name }}" />
     </div>
 </div>
