@@ -9,7 +9,8 @@
 
     <div class="list-obj" *ngFor="let show of list">
       <app-show-card [show]="show" [isSmall]="true"></app-show-card>
-      <button (click)="delete(show.id)">X</button>
+      <!-- <button (click)="delete(show.id)">X</button> -->
+      <i class="fa-solid fa-circle-xmark" (click)="delete(show.id)" style="cursor: pointer;"></i>
     </div>
 
   </div>

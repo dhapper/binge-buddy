@@ -12,17 +12,18 @@
   --input-bg: #4e4e4e;
 }
 
-/* .dark-mode {
+.dark-mode {
   --background: #333333;;
   --background-variant: #272727;
   --text: #ffffff;
-  --accent: #ffc1ad;
-  --accent-variant: #a8857a;
+  --accent: #b277ff;
+  --accent-variant: #6f4c9c;
 
   --input-bg: #4e4e4e;
-} */
+  --button-text: #ffffff;
+}
 
-.dark-mode {
+/* .dark-mode-2 {
   --background: #121212;
   --background-variant: #333333;
   --text: #ffffff;
@@ -30,7 +31,7 @@
   --accent-variant: #6f4c9c;
 
   --input-bg: #4e4e4e;
-}
+} */
 
 .light-mode {
   --background: #e0e0e0;
@@ -40,4 +41,5 @@
   --accent-variant: #624b80;
 
   --input-bg: #e0e0e0;
+  --button-text: #ffffff;
 }

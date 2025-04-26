@@ -17,6 +17,14 @@
     box-shadow: 0px 0px 16px var(--accent);
 }
 
-button {
-    font-size: 8px;
+i {
+    color: var(--background);
+}
+
+.list-obj:hover i {
+    color: var(--accent);
+}
+
+.list-obj:hover i:hover {
+    color: var(--accent-variant);
 }

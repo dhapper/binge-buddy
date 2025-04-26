@@ -2,13 +2,21 @@
 
 <div class="main-container">
 
-  <img src="assets/binge_buddy_icon.png" alt="Default Image">
+  <!-- <img src="assets/binge_buddy_icon.png" alt="Default Image"> -->
 
-  <h2>Welcome back EMAIL!</h2>
+  <div>
+    <label class="toggle-switch">
+      <input type="checkbox" id="theme-toggle" (change)="onThemeToggle($event)" />
+      <span class="slider"></span>
+      <i id="moon-icon" class="fas fa-moon" style="margin-left: 10px;"></i>
+    </label>
+  </div>
+
+  <h1>Welcome back {{username}}!</h1>
 
 
-  <button (click)="toggleList()" [disabled]="firstList" style="margin-right: 10px;">watch-list</button>
-  <button (click)="toggleList()" [disabled]="!firstList" style="margin-right: 10px;">your history</button>
+  <button (click)="toggleList()" *ngIf="!firstList" style="margin-right: 10px;">View Your Watch-list</button>
+  <button (click)="toggleList()" *ngIf="firstList" style="margin-right: 10px;">View Your History</button>
 
   <div *ngIf="firstList">
     <app-list [list]="watchlist" [category]="AppConstants.CATEGORIES.WATCH_LIST"
