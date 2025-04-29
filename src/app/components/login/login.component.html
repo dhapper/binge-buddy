@@ -12,11 +12,11 @@
       <div><button (click)="onLogin()">Login</button></div>
       <div class="reg-button"><button (click)="onRegister()">Register</button></div>
 
-        <label class="toggle-switch">
-          <input type="checkbox" id="theme-toggle" (change)="onThemeToggle($event)" />
-          <span class="slider"></span>
-          <i id="moon-icon" class="fas fa-moon"></i>
-        </label>
+      <label class="toggle-switch">
+        <input type="checkbox" id="theme-toggle" (change)="onThemeToggle($event)" />
+        <span class="slider"></span>
+        <i id="moon-icon" class="fas fa-moon"></i>
+      </label>
 
       <div *ngIf="message" class="alert alert-warning">
         {{ message }}
@@ -28,6 +28,13 @@
       <img src="assets/login_image_v1.jpg" alt="Default Image">
     </div>
 
+  </div>
+
+  <div class="alert alert-success">
+    <p>An application to showcase my Angular skills.</p>
+    <p>Register or use the guest credentials below:</p>
+    <p><strong>Email:</strong> guest&#64;bingebuddy.ca</p>
+    <p><strong>Password:</strong> guest-password</p>
   </div>
 
 </div>
