@@ -26,31 +26,47 @@ export class LoginComponent {
     private firestoreDatabase: FirestoreDatabase,
     private theme: ThemeService
   ) { }
-  
-  onLogin() {
-    this.authService.login(this.email, this.password)
-      .then(() => {
-        console.log('Login successful');
-        // this.message = 'Login successful';
 
-        const userID = this.authService.currentUser?.uid!;
+  autoLoginAsGuest() {
+    this.email = 'guest@bingebuddy.ca';
+    this.password = 'guest-password';
+    this.onLogin();
+  }
 
-        // Use Promise.all to run both loads in parallel
-        return Promise.all([
-          this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.WATCH_LIST),
-          this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.HISTORY)
-        ]);
-      })
-      .then(() => {
+ onLogin() {
+  const isGuest = this.email === 'guest@bingebuddy.ca' && this.password === 'guest-password';
+
+  this.authService.login(this.email, this.password)
+    .then(() => {
+      console.log('Login successful');
+      const userID = this.authService.currentUser?.uid!;
+
+      if (isGuest) {
+        // Skip database load or load default/mock data
+        console.log('Guest login - skipping database load');
+        // Optionally, set some default data here
+        this.router.navigate(['/profile']);
+        return;
+      }
+
+      // Normal user flow
+      return Promise.all([
+        this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.WATCH_LIST),
+        this.firestoreDatabase.load(userID, AppConstants.CATEGORIES.HISTORY)
+      ]);
+    })
+    .then(() => {
+      if (!isGuest) {
         console.log('Watchlist loaded:', this.firestoreDatabase.getLocalWatchList(this.authService.currentUser?.uid!));
         console.log('History loaded:', this.firestoreDatabase.getLocalHistory(this.authService.currentUser?.uid!));
         this.router.navigate(['/profile']);
-      })
-      .catch((error) => {
-        this.message = error.message.substring(10); // declutter message 
-        console.error(error.message);
-      });
-  }
+      }
+    })
+    .catch((error) => {
+      this.message = error.message.substring(10); // declutter message 
+      console.error(error.message);
+    });
+}
 
   onRegister() {
     this.authService.register(this.email, this.password)

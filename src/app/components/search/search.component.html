@@ -3,8 +3,10 @@
 <div class="main-container">
 
     <h1>Search for TV Shows</h1>
-    <input [(ngModel)]="searchTerm" placeholder="Enter show name..." />
-    <button class="btn-margin" (click)="performSearch()">Search</button>
+    <div style="display: flex; justify-content: center;">
+        <input [(ngModel)]="searchTerm" placeholder="Enter show name..." />
+        <button class="btn-margin" (click)="performSearch()">Search</button>
+    </div>
 
     <div *ngFor="let show of shows" class="show-container">
 
@@ -13,7 +15,7 @@
 
         <!-- vertically stacked -->
         <div class="button-container">
-            <button (click)="addToDatabase(show.id, 'watch-list')"  class="show-button">Add to<br>watch list</button>
+            <button (click)="addToDatabase(show.id, 'watch-list')" class="show-button">Add to<br>watch list</button>
             <button (click)="addToDatabase(show.id, 'history')" class="show-button">Add to<br>watch history</button>
         </div>
     </div>

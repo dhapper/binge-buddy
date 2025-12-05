@@ -14,9 +14,10 @@
 
   <h1>Welcome back {{username}}!</h1>
 
-
-  <button (click)="toggleList()" *ngIf="!firstList" style="margin-right: 10px;">View Your Watch-list</button>
-  <button (click)="toggleList()" *ngIf="firstList" style="margin-right: 10px;">View Your History</button>
+  <div style="display: flex; justify-content: center;">
+    <button (click)="toggleList()" *ngIf="!firstList" style="margin-right: 10px;">View Your Watch-list</button>
+    <button (click)="toggleList()" *ngIf="firstList" style="margin-right: 10px;">View Your History</button>
+  </div>
 
   <div *ngIf="firstList">
     <app-list [list]="watchlist" [category]="AppConstants.CATEGORIES.WATCH_LIST"
